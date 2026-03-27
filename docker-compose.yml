@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  lord-spyk3:
+    build: .
+    container_name: lord-spyk3-bot
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - spyk3-data:/home/lordspyk3/.lord_spyk3
+      - spyk3-reports:/app/spyk3_reports
+      - spyk3-alerts:/app/alerts
+      - spyk3-monitoring:/app/monitoring
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - TZ=UTC
+      - PYTHONUNBUFFERED=1
+      - LOG_LEVEL=INFO
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+      - SYS_ADMIN
+    devices:
+      - /dev/net/tun
+    security_opt:
+      - apparmor:unconfined
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  spyk3-data:
+  spyk3-reports:
+  spyk3-alerts:
+  spyk3-monitoring:
