@@ -1,0 +1,89 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lord-spyk3
+  namespace: security-tools
+  labels:
+    app: lord-spyk3
+    version: v8
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lord-spyk3
+  template:
+    metadata:
+      labels:
+        app: lord-spyk3
+        version: v8
+    spec:
+      serviceAccountName: lord-spyk3
+      containers:
+      - name: lord-spyk3
+        image: lord-spyk3:latest
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          privileged: true
+          capabilities:
+            add:
+            - NET_ADMIN
+            - NET_RAW
+            - SYS_ADMIN
+        env:
+        - name: TZ
+          value: "UTC"
+        - name: PYTHONUNBUFFERED
+          value: "1"
+        - name: LOG_LEVEL
+          value: "INFO"
+        volumeMounts:
+        - name: data
+          mountPath: /home/lordspyk3/.lord_spyk3
+        - name: reports
+          mountPath: /app/spyk3_reports
+        - name: alerts
+          mountPath: /app/alerts
+        - name: monitoring
+          mountPath: /app/monitoring
+        - name: config
+          mountPath: /app/config
+          readOnly: true
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "2000m"
+        livenessProbe:
+          exec:
+            command:
+            - python
+            - -c
+            - "import sys; sys.exit(0)"
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          exec:
+            command:
+            - python
+            - -c
+            - "import sys; sys.exit(0)"
+          initialDelaySeconds: 10
+          periodSeconds: 5
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: spyk3-data-pvc
+      - name: reports
+        persistentVolumeClaim:
+          claimName: spyk3-reports-pvc
+      - name: alerts
+        persistentVolumeClaim:
+          claimName: spyk3-alerts-pvc
+      - name: monitoring
+        persistentVolumeClaim:
+          claimName: spyk3-monitoring-pvc
+      - name: config
+        configMap:
+          name: lord-spyk3-config
