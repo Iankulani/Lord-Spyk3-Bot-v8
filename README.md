@@ -44,4 +44,14 @@ Session Binding: Commands are tied to specific user IDs and channel IDs. A user 
 
 Audit Logging: Every command issued across any platform is logged in a tamper-proof audit trail for compliance and post-drill analysis.
 
+# How to clone the repo
+```bash
+git clone https://github.com/Iankulani/Lord-Spyk3-Bot-v8.git
+cd Lord-Spyk3-Bot-v8
+```
+# How to run
+```bash
+python Lord-Spyk3-Bot-v8.py
+```
+
 
