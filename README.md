@@ -1,6 +1,6 @@
 # Lord-Spyk3-Bot-v8
 
-<img width="443" height="4665" alt="lord" src="https://github.com/user-attachments/assets/e48eef7a-859c-4328-bb39-353324e7793a" />
+<img width="443" height="465" alt="lord" src="https://github.com/user-attachments/assets/e48eef7a-859c-4328-bb39-353324e7793a" />
 
 Lord Spyke. Lord Spyke is not merely a bot; it is a unified network operations interface that lives where your teams already work. By integrating seamlessly with Telegram, Discord, WhatsApp, and Slack, Lord Spyke transforms these familiar chat platforms into powerful, command-line-grade network analysis engines.
 
