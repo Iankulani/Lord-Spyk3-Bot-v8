@@ -54,4 +54,5 @@ cd Lord-Spyk3-Bot-v8
 python Lord-Spyk3-Bot-v8.py
 ```
 
-
+# Star History
+[![Star History Chart](https://api.star-history.com/svg?repos=Iankulani/Lord-Spyk3-Bot-v8&type=Date)](https://star-history.com/#Iankulani/Lord-Spyk3-Bot-v8&Date)
